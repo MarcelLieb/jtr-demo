@@ -1,6 +1,6 @@
 use std::{fs::File, io::Read};
 
-use md5::{Digest, Md5};
+use sha2::{Sha512, Digest};
 
 // digest of the hashes.txt file
 static SECRET: &str = "";
@@ -12,7 +12,7 @@ fn main() -> std::io::Result<()> {
     let hashes = file.lines().map(|s| s.to_string()).collect::<Vec<String>>();
 
 
-    let mut hasher = Md5::new();
+    let mut hasher = Sha512::new();
     hasher.update(file);
     let verification = hasher.finalize();
     let verification = format!("{:x}", verification);
@@ -23,7 +23,7 @@ fn main() -> std::io::Result<()> {
     }
     
     // Hash input
-    let mut hasher = Md5::new();
+    let mut hasher = Sha512::new();
     hasher.update(input);
     let input = hasher.finalize();
 

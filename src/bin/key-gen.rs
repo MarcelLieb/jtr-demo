@@ -1,6 +1,6 @@
 use std::time::{SystemTime, UNIX_EPOCH};
 use rand::{Rng, SeedableRng};
-use md5::{Digest, Md5};
+use sha2::{Digest, Sha512};
 
 
 
@@ -16,7 +16,7 @@ fn main () {
     for _ in 0..20 {
         let key: [u8; 32] = rng.gen();
         let hex_string: String = format!("{:02X?}", key).replace(", ", "").replace("[", "").replace("]", "");
-        let mut hasher = Md5::new();
+        let mut hasher = Sha512::new();
         hasher.update(hex_string.clone());
         let input = hasher.finalize();
         let hash = format!("{:x}", input);
