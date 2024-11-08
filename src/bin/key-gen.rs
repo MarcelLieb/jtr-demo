@@ -1,15 +1,13 @@
 use std::time::{SystemTime, UNIX_EPOCH};
 use rand::{Rng, SeedableRng};
-use rand_chacha::ChaChaRng;
 use md5::{Digest, Md5};
 
 
 
 fn main () {
     let now = SystemTime::now();
-    let seed = now.duration_since(UNIX_EPOCH.into()).unwrap().as_millis();
-    let seed_lower = seed as u64;
-    let mut rng = ChaChaRng::seed_from_u64(seed_lower);
+    let seed = now.duration_since(UNIX_EPOCH.into()).unwrap().as_millis() as u64;
+    let mut rng = rand_chacha::ChaChaRng::seed_from_u64(seed);
     let mut keys = Vec::new();
     let mut hashes: Vec<String> = Vec::new();
 
@@ -27,8 +25,10 @@ fn main () {
     }
 
     // save the keys and hashes to a file
+    let mut seed = format!("{}\n", seed);
     let keys = keys.join("\n");
+    seed.push_str(&keys);
     let hashes = hashes.join("\n");
-    std::fs::write("keys.txt", keys).unwrap();
+    std::fs::write("keys.txt", seed).unwrap();
     std::fs::write("hashes.txt", hashes).unwrap();
 }
