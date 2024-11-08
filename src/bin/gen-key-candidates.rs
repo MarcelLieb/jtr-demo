@@ -72,7 +72,7 @@ async fn main() {
 
 
     seeds.into_par_iter().for_each(|seed| {
-        let mut rng = rand_chacha::ChaCha8Rng::seed_from_u64(seed);
+        let mut rng = rand_chacha::ChaChaRng::seed_from_u64(seed);
         let key: [u8; 32] = rng.gen();
         let hex_string: String = format!("{:02X?}", key).replace(", ", "").replace("[", "").replace("]", "");
         let tx = tx.clone();
