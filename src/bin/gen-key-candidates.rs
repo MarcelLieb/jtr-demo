@@ -24,7 +24,6 @@ async fn main() {
     let end_seed = start_time as u128 * 1000;
     let start_seed = end_time as u128 * 1000;
     println!("Generating keys from {} to {}", start_seed, end_seed);
-    println!("True seed present: {}", start_seed < 1731072461822 && end_seed > 1731072461822);
     let seeds = (start_seed..end_seed).map(|x| x as u64).collect::<Vec<u64>>();
     println!("Generating {} keys", seeds.len());
 
