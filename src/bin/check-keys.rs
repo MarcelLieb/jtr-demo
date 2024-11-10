@@ -1,14 +1,12 @@
-use std::fs::File;
-use std::io::{self, prelude::*, BufReader};
+use std::fs::{self, File};
+use std::io::{self, BufRead, BufReader};
 
 
 fn main() -> io::Result<()> {
     let file = File::open("key_candidates.txt")?;
     let reader = BufReader::new(file);
-    let mut keys = String::new();
-    let _ = File::open("keys.txt")?.read_to_string(&mut keys)?;
-    let mut hashes = String::new();
-    let _ = File::open("hashes.txt")?.read_to_string(&mut hashes)?;
+    let keys = fs::read_to_string("keys.txt")?;
+    let _hashes = fs::read_to_string("hashes.txt")?;
     let keys = keys.lines().map(|s| s.to_string()).skip(1).collect::<Vec<String>>();
 
     for line in reader.lines() {

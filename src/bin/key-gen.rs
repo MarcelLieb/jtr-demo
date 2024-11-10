@@ -16,9 +16,7 @@ fn main () {
     for _ in 0..20 {
         let key: [u8; 32] = rng.gen();
         let hex_string: String = format!("{:02X?}", key).replace(", ", "").replace("[", "").replace("]", "");
-        let mut hasher = Sha512::new();
-        hasher.update(hex_string.clone());
-        let input = hasher.finalize();
+        let input = Sha512::digest(hex_string.as_bytes());
         let hash = format!("{:x}", input);
         hashes.push(hash);
         keys.push(hex_string);

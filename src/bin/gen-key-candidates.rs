@@ -26,13 +26,10 @@ fn main() {
 
     let file = OpenOptions::new()
         .write(true)
-        .append(true)
         .create(true)
+        .truncate(true)
         .open("key_candidates.txt")
         .unwrap();
-
-    // clear the file
-    let _ = file.set_len(0);
 
     let file = BufWriter::new(file);
     let file = Mutex::new(file);
