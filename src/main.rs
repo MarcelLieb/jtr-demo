@@ -3,7 +3,7 @@ use std::fs::{self};
 use sha2::{Sha512, Digest};
 
 // digest of the hashes.txt file
-static SECRET: &str = "6be14066aec127466cbac668dd6d4143168da39e6742b5f3b85c8f468e1185e5f20331f107ae339486f917eabfa06801430a082fb39563d2ffc430266ddb8709";
+static SECRET: &str = "3296d928cca0935e65c24c3cfa70a43104bc4b13030563b8b93cce6c558a39aad92dfd863675e82cff3fccc9883ffdffdb748ce98f25b65d249edbc3db2c9651";
 
 fn main() -> std::io::Result<()> {
     let input = std::env::args().nth(1).expect("Usage: demo <key>");
